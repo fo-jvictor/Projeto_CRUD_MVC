@@ -12,8 +12,8 @@ public class EmpregadoDAO {
 	// variavel que vai ser utilizada para realizar operações no banco de dados
 	private Connection con;
 
-	// a classe DAO de alguma entidade vai ser a classe que possui
-	// os métodos CRUD.
+	// a classe DAO de alguma entidade vai ser a classe que possui os métodos CRUD.
+	
 	public EmpregadoDAO() {
 	}
 
@@ -30,7 +30,9 @@ public class EmpregadoDAO {
 		double salario = 0;
 
 		String sql = "select * from Empregado where id like ?";
+		//string sql para consultar o empregado com base no seu ID
 		PreparedStatement prepS;
+		//prep S é o objeto que vai ser utilizado para guardar e executar a string sql
 		try {
 			prepS = con.prepareStatement(sql);
 			prepS.setInt(1, e.getId());
@@ -42,19 +44,9 @@ public class EmpregadoDAO {
 				nome = resultSet.getString(2);
 				idade = resultSet.getInt(3);
 				salario = resultSet.getDouble(4);
-
-				// implementação minha....
-				// com essa implementação os valores de nome,idade só vao ser settados caso
-				// result set tenha um "next"
-				// e.setNome(resultSet.getString(2));
-				// e.setIdade(resultSet.getInt(3));
-				// e.setSalario(resultSet.getDouble(4);
+				
 			}
-			// jeito que o professor implementou, achei estranho pq se o resultSet não tiver
-			// next no while
-			// ele vai setar os campos do empregado e iguais a nulo. pq é o valor das
-			// variaveis caso não entre
-			// no loop while
+			//Settando no objeto Empregado os campos nome,idade e salario que foram obtidos através do resultSet
 			e.setNome(nome);
 			e.setIdade(idade);
 			e.setSalario(salario);
@@ -89,7 +81,7 @@ public class EmpregadoDAO {
 
 				if (result == 1) {
 					ClasseConexaoMySQL.fecharConexao();
-					System.out.println("QUERY FUNCIONOU!!!");
+					System.out.println("CADASTRO FUNCIONOU!!!");
 					return true;
 				}
 				ClasseConexaoMySQL.fecharConexao();

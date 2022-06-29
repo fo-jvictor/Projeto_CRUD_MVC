@@ -25,7 +25,7 @@ public class JanelaPrincipal extends JFrame {
 	private JTextField salarioField;
 	private JButton buttonConsultar;
 	private JButton buttonCadastrar;
-	private JButton buttonDelete;
+	private JButton buttonRemover;
 	private JButton buttonAtualizar;
 
 	/**
@@ -49,7 +49,7 @@ public class JanelaPrincipal extends JFrame {
 	 */
 	public JanelaPrincipal() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 211);
+		setBounds(100, 100, 477, 193);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -60,7 +60,7 @@ public class JanelaPrincipal extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		idField = new JTextField();
-		idField.setBounds(41, 8, 111, 20);
+		idField.setBounds(41, 8, 92, 20);
 		contentPane.add(idField);
 		idField.setColumns(10);
 		
@@ -69,25 +69,25 @@ public class JanelaPrincipal extends JFrame {
 		contentPane.add(lblNewLabel_1);
 		
 		nomeField = new JTextField();
-		nomeField.setBounds(51, 44, 101, 20);
+		nomeField.setBounds(51, 44, 173, 20);
 		contentPane.add(nomeField);
 		nomeField.setColumns(10);
 		
 		JLabel lblNewLabel_2 = new JLabel("Idade:");
-		lblNewLabel_2.setBounds(178, 11, 46, 14);
+		lblNewLabel_2.setBounds(239, 11, 46, 14);
 		contentPane.add(lblNewLabel_2);
 		
 		idadeField = new JTextField();
-		idadeField.setBounds(219, 8, 86, 20);
+		idadeField.setBounds(280, 8, 118, 20);
 		contentPane.add(idadeField);
 		idadeField.setColumns(10);
 		
 		JLabel lblNewLabel_3 = new JLabel("Salario:");
-		lblNewLabel_3.setBounds(178, 47, 46, 14);
+		lblNewLabel_3.setBounds(239, 47, 46, 14);
 		contentPane.add(lblNewLabel_3);
 		
 		salarioField = new JTextField();
-		salarioField.setBounds(219, 44, 86, 20);
+		salarioField.setBounds(280, 44, 118, 20);
 		contentPane.add(salarioField);
 		salarioField.setColumns(10);
 		
@@ -98,23 +98,23 @@ public class JanelaPrincipal extends JFrame {
 				//EmpregadoControle empregadoControle = new EmpregadoControle(frame);
 			}
 		});
-		buttonConsultar.setBounds(10, 123, 89, 23);
+		buttonConsultar.setBounds(10, 123, 102, 23);
 		contentPane.add(buttonConsultar);
 		
-		buttonDelete = new JButton("Delete");
-		buttonDelete.setBounds(104, 123, 89, 23);
-		contentPane.add(buttonDelete);
+		buttonRemover = new JButton("Remover");
+		buttonRemover.setBounds(122, 123, 102, 23);
+		contentPane.add(buttonRemover);
 		
 		buttonCadastrar = new JButton("Cadastrar");
 		buttonCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		buttonCadastrar.setBounds(197, 123, 89, 23);
+		buttonCadastrar.setBounds(236, 123, 101, 23);
 		contentPane.add(buttonCadastrar);
 		
 		buttonAtualizar = new JButton("Atualizar");
-		buttonAtualizar.setBounds(288, 123, 89, 23);
+		buttonAtualizar.setBounds(348, 123, 103, 23);
 		contentPane.add(buttonAtualizar);
 	}
 
@@ -164,14 +164,14 @@ public class JanelaPrincipal extends JFrame {
 
 	public void setButtonCadastrar(JButton buttonCadastrar) {
 		this.buttonCadastrar = buttonCadastrar;
+	}	
+
+	public JButton getButtonRemover() {
+		return buttonRemover;
 	}
 
-	public JButton getButtonDelete() {
-		return buttonDelete;
-	}
-
-	public void setButtonDelete(JButton buttonDelete) {
-		this.buttonDelete = buttonDelete;
+	public void setButtonRemover(JButton buttonRemover) {
+		this.buttonRemover = buttonRemover;
 	}
 
 	public JButton getButtonAtualizar() {
