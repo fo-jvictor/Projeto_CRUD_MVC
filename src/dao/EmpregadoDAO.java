@@ -9,20 +9,13 @@ import model.Empregado;
 
 public class EmpregadoDAO {
 
-	// variavel que vai ser utilizada para realizar operações no banco de dados
 	private Connection con;
-
-	// a classe DAO de alguma entidade vai ser a classe que possui os métodos CRUD.
 	
 	public EmpregadoDAO() {
 	}
 
-	public boolean consultaEmpregado(Empregado e) {
-		// metodo de consulta empregado no banco de dados
+	public boolean consultaEmpregado(Empregado empregado) {
 		ClasseConexaoMySQL.abrirConexaoMySQL();
-		// con recebendo o .getCon() da classe de conexao com o banco.
-		// o método publico getCon() na classe ConexaoMySQL retorna o atributo con
-		// que possui uma conexao com os dados de username, senha e servidor
 		con = ClasseConexaoMySQL.getCon();
 
 		int idade = 0;
@@ -30,13 +23,10 @@ public class EmpregadoDAO {
 		double salario = 0;
 
 		String sql = "select * from Empregado where id like ?";
-		//string sql para consultar o empregado com base no seu ID
 		PreparedStatement prepS;
-		//prep S é o objeto que vai ser utilizado para guardar e executar a string sql
 		try {
 			prepS = con.prepareStatement(sql);
-			prepS.setInt(1, e.getId());
-			// resultSet retorna quantas linhas foram afetadas no banco de dados
+			prepS.setInt(1, empregado.getId());
 			ResultSet resultSet = prepS.executeQuery();
 
 			while (resultSet.next()) {
@@ -46,10 +36,9 @@ public class EmpregadoDAO {
 				salario = resultSet.getDouble(4);
 				
 			}
-			//Settando no objeto Empregado os campos nome,idade e salario que foram obtidos através do resultSet
-			e.setNome(nome);
-			e.setIdade(idade);
-			e.setSalario(salario);
+			empregado.setNome(nome);
+			empregado.setIdade(idade);
+			empregado.setSalario(salario);
 			con.close();
 			return true;
 
@@ -61,7 +50,7 @@ public class EmpregadoDAO {
 
 	}
 
-	public boolean cadastraEmpregado(Empregado e) {
+	public boolean cadastraEmpregado(Empregado empregado) {
 
 		ClasseConexaoMySQL.abrirConexaoMySQL();
 		con = ClasseConexaoMySQL.getCon();
@@ -72,16 +61,16 @@ public class EmpregadoDAO {
 			PreparedStatement prepS;
 			try {
 				prepS = con.prepareStatement(sql);
-				prepS.setInt(1, e.getId());
-				prepS.setString(2, e.getNome());
-				prepS.setInt(3, e.getIdade());
-				prepS.setDouble(4, e.getSalario());
+				prepS.setInt(1, empregado.getId());
+				prepS.setString(2, empregado.getNome());
+				prepS.setInt(3, empregado.getIdade());
+				prepS.setDouble(4, empregado.getSalario());
 
 				int result = prepS.executeUpdate();
 
 				if (result == 1) {
 					ClasseConexaoMySQL.fecharConexao();
-					System.out.println("CADASTRO FUNCIONOU!!!");
+					System.out.println("Empregado cadastrado com sucesso!");
 					return true;
 				}
 				ClasseConexaoMySQL.fecharConexao();
@@ -96,7 +85,7 @@ public class EmpregadoDAO {
 
 	}
 
-	public boolean deletaEmpregado(Empregado e) {
+	public boolean deletaEmpregado(Empregado empregado) {
 
 		ClasseConexaoMySQL.abrirConexaoMySQL();
 		con = ClasseConexaoMySQL.getCon();
@@ -107,12 +96,12 @@ public class EmpregadoDAO {
 
 			try {
 				prepS = con.prepareStatement(sql);
-				prepS.setInt(1, e.getId());
+				prepS.setInt(1, empregado.getId());
 				int result = prepS.executeUpdate();
 
 				if (result > 0) {
 					ClasseConexaoMySQL.fecharConexao();
-					System.out.println("DELETE FUNCIONOU");
+					System.out.println("Empregado deletado com sucesso!");
 					return true;
 				}
 				ClasseConexaoMySQL.fecharConexao();
@@ -126,7 +115,7 @@ public class EmpregadoDAO {
 		return false;
 	}
 
-	public boolean atualizaEmpregado(Empregado e) {
+	public boolean atualizaEmpregado(Empregado empregado) {
 		ClasseConexaoMySQL.abrirConexaoMySQL();
 		con = ClasseConexaoMySQL.getCon();
 
@@ -135,16 +124,16 @@ public class EmpregadoDAO {
 			PreparedStatement prepS;
 			try {				
 				prepS = con.prepareStatement(sql);
-				prepS.setString(1, e.getNome());
-				prepS.setInt(2, e.getIdade());
-				prepS.setDouble(3, e.getSalario());
-				prepS.setInt(4, e.getId());
+				prepS.setString(1, empregado.getNome());
+				prepS.setInt(2, empregado.getIdade());
+				prepS.setDouble(3, empregado.getSalario());
+				prepS.setInt(4, empregado.getId());
 				int result = prepS.executeUpdate();
 				
 				if(result>0)
 				{
 					ClasseConexaoMySQL.fecharConexao();
-					System.out.println("UPDATE FUNCIONOU!");
+					System.out.println("Empregado atualizado com sucesso!");
 					return true;
 				}
 				ClasseConexaoMySQL.fecharConexao();
